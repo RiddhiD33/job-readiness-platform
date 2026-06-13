@@ -192,7 +192,59 @@ The readiness score calculation must handle:
 * No project available
 * No internship and no project available
 
-The platform redistributes weights according to the approved business rules while ensuring the final score remains out of 100.
+## Weight Redistribution Rules
+
+The platform ensures that students are not penalized for lacking internships or projects, especially early in their academic journey.
+
+### Scenario 1: No Internship
+
+Original Internship Weight:
+
+```text
+25%
+```
+
+Redistributed Formula:
+
+| Component            | Weight |
+| -------------------- | ------ |
+| Assessment           | 50%    |
+| Projects             | 40%    |
+| Profile Completeness | 10%    |
+
+---
+
+### Scenario 2: No Project
+
+Original Project Weight:
+
+```text
+25%
+```
+
+Redistributed Formula:
+
+| Component            | Weight |
+| -------------------- | ------ |
+| Assessment           | 50%    |
+| Internship           | 40%    |
+| Profile Completeness | 10%    |
+
+---
+
+### Scenario 3: No Project and No Internship
+
+Redistributed Formula:
+
+| Component            | Weight |
+| -------------------- | ------ |
+| Assessment           | 90%    |
+| Profile Completeness | 10%    |
+
+This scenario is expected to be common for early-semester students who have not yet completed projects or internships.
+
+The platform still provides a meaningful readiness score while encouraging students to improve their profile and complete assessments.
+
 
 ---
 
