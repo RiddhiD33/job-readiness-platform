@@ -16,7 +16,7 @@ POST /api/logout
 
 ---
 
-## Student Profile APIs
+# Student Profile APIs
 
 ### Get Own Profile
 
@@ -51,7 +51,7 @@ Public Profile:
 
 ---
 
-## Project APIs
+# Project APIs
 
 ### List Projects
 
@@ -71,13 +71,13 @@ DELETE /api/projects/{id}
 
 ### Rules
 
-* Only owner student can manage projects.
+* Only the owner student can manage projects.
 * Recruiters can view projects through public profiles.
 * Any project change triggers readiness score recalculation.
 
 ---
 
-## Internship APIs
+# Internship APIs
 
 ### List Internships
 
@@ -97,13 +97,13 @@ DELETE /api/internships/{id}
 
 ### Rules
 
-* Only owner student can manage internships.
+* Only the owner student can manage internships.
 * Recruiters can view internships through public profiles.
 * Any internship change triggers readiness score recalculation.
 
 ---
 
-## Assessment APIs
+# Assessment APIs
 
 ### List Available Assessments
 
@@ -132,13 +132,13 @@ GET /api/assessment-attempts/{id}
 ### Rules
 
 * Every assessment attempt is stored permanently.
-* Latest score is displayed prominently.
+* The latest score is used in readiness score calculations.
 * Historical attempts remain accessible.
 * Assessment submission triggers readiness score recalculation.
 
 ---
 
-## Recruiter APIs
+# Recruiter APIs
 
 ### Search Students
 
@@ -154,6 +154,7 @@ Supported Filters:
 * cgpa
 
 Example:
+
 GET /api/students?readiness_score=80&skill=laravel
 
 ### View Student Profile
@@ -184,61 +185,85 @@ GET /api/recruiter-interests
 
 ---
 
-## Admin APIs
+# Admin APIs
 
-### Career Path Management
+## Career Path Management
 
 GET /api/admin/career-paths
+
 POST /api/admin/career-paths
+
 PUT /api/admin/career-paths/{id}
+
 DELETE /api/admin/career-paths/{id}
 
-### Skill Management
+---
+
+## Skill Management
 
 GET /api/admin/skills
+
 POST /api/admin/skills
+
 PUT /api/admin/skills/{id}
+
 DELETE /api/admin/skills/{id}
 
-### Assessment Management
+---
+
+## Assessment Management
 
 GET /api/admin/assessments
+
 POST /api/admin/assessments
+
 PUT /api/admin/assessments/{id}
+
 DELETE /api/admin/assessments/{id}
 
-### Assessment Question Management
+---
+
+## Assessment Question Management
 
 GET /api/admin/assessment-questions
+
 POST /api/admin/assessment-questions
+
 PUT /api/admin/assessment-questions/{id}
+
 DELETE /api/admin/assessment-questions/{id}
 
-### Practical Task Management
+---
 
-GET /api/admin/practical-tasks
-POST /api/admin/practical-tasks
-PUT /api/admin/practical-tasks/{id}
-DELETE /api/admin/practical-tasks/{id}
-
-### Student Monitoring
+## Student Monitoring
 
 GET /api/admin/students
-GET /api/admin/students/{id}
-DELETE /api/admin/students/{id}
 
-### Recruiter Monitoring
+GET /api/admin/students/{id}
+
+PATCH /api/admin/students/{id}/deactivate
+
+---
+
+## Recruiter Monitoring
 
 GET /api/admin/recruiters
+
 GET /api/admin/recruiters/{id}
-DELETE /api/admin/recruiters/{id}
+
+PATCH /api/admin/recruiters/{id}/deactivate
+
+---
 
 ### Rules
 
 Admins Can:
 
 * View all platform data
-* Create and manage platform content
+* Create and manage career paths
+* Create and manage skills
+* Create and manage assessments
+* Create and manage assessment questions
 * Deactivate accounts
 
 Admins Cannot:
@@ -248,3 +273,5 @@ Admins Cannot:
 * Modify assessment attempts
 * Modify student projects
 * Modify student internships
+* Modify student profiles
+* Modify recruiter profiles

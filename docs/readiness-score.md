@@ -8,7 +8,7 @@ The score helps:
 
 * Students understand their current readiness level.
 * Recruiters quickly identify suitable candidates.
-* The platform provide a standardized evaluation system.
+* The platform provides a standardized evaluation system.
 
 The readiness score ranges from:
 
@@ -50,7 +50,7 @@ Assessment scores are stored permanently.
 
 When a student retakes an assessment:
 
-* The new score becomes the current score.
+* The latest assessment score becomes the score used in readiness score calculations.
 * Previous attempts remain stored in history.
 
 ---
@@ -175,8 +175,6 @@ Stored historical data includes:
 The platform stores all assessment attempts.
 
 Students can view their assessment history.
-
-Recruiters can view historical readiness records when available.
 
 Historical records help demonstrate learning progress and growth.
 

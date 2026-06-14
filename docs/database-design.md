@@ -47,8 +47,14 @@ Fields:
 * resume_url
 * career_path_id
 * readiness_score
+* profile_status
 * created_at
 * updated_at
+
+Profile Status Values:
+
+* draft
+* public
 
 ---
 
@@ -118,13 +124,21 @@ Fields:
 * student_profile_id
 * title
 * description
+* project_type
 * github_link
 * demo_link
 * status
 * created_at
 * updated_at
 
-Status:
+Project Type Values:
+
+* personal
+* academic
+* company
+* freelance
+
+Status Values:
 
 * draft
 * published
@@ -151,7 +165,7 @@ Fields:
 * created_at
 * updated_at
 
-Status:
+Status Values:
 
 * draft
 * published
@@ -221,7 +235,7 @@ Fields:
 
 * id
 * assessment_attempt_id
-* question_id
+* assessment_question_id
 * answer
 * score
 * created_at
@@ -240,6 +254,19 @@ Fields:
 * student_profile_id
 * created_at
 * updated_at
+
+---
+
+## career_path_history
+
+Stores career path changes made by students.
+
+Fields:
+
+* id
+* student_profile_id
+* career_path_id
+* created_at
 
 ---
 

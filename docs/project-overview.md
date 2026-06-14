@@ -38,7 +38,7 @@ Can:
 - View student profiles
 - View readiness score breakdown
 - Show interest in students
-- Request connection with students
+- Request connection with students (Version 2 Feature)
 
 ---
 
@@ -134,6 +134,8 @@ Features:
 - Filter students
 - View profiles
 - Show interest
+
+Version 2:
 - Request connection
 
 ---
