@@ -268,6 +268,10 @@ Fields:
 * career_path_id
 * created_at
 
+* Note:
+Stores historical career path selections.
+Records are append-only and should not be updated.
+
 ---
 
 # Junction Tables
