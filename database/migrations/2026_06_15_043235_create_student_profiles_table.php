@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('current_city')->nullable();
 
-            $table->decimal('cgpa',3,2)->nullable();
+            $table->decimal('cgpa',4,2)->nullable();
 
-            $table->string('protfolio_url')->nullable();
+            $table->string('portfolio_url')->nullable();
             $table->string('resume_url')->nullable();
 
             $table->foreignId('career_path_id')->nullable()->constrained('career_paths')->nullOnDelete();

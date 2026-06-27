@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('student_profile_id')->constrained()->cascadeOnDelete();
             $table->foreignId('assessment_id')->constrained()->cascadeOnDelete();
-            $table->decimal('score',5,2);
+            $table->decimal('score',5,2)->nullable();
             $table->timestamps();
         });
     }

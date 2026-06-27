@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Skill extends Model
 {
     public function careerPaths(): BelongsToMany{
-        return $this->belongsToMany(CareerPath::class);
+        return $this->belongsToMany(CareerPath::class,'career_path_skills','skill_id',
+        'career_path_id');
     }
 
     public function studentProfiles(): BelongsToMany{
@@ -16,7 +17,7 @@ class Skill extends Model
     }
 
     public function projects(): BelongsToMany{
-        return $this->belongsToMany(Project::class);
+        return $this->belongsToMany(Project::class,'project_skills');
     }
 
     public function internships(): BelongsToMany{

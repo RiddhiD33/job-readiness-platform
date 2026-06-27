@@ -22,7 +22,7 @@ return new class extends Migration
 
     $table->text('question');
 
-    $table->text('options')->nullable();
+    $table->json('options')->nullable();
 
     $table->text('correct_answer')->nullable();
 

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('assessment_attempt_id')->constrained()->cascadeOnDelete();
             $table->foreignId('assessment_question_id')->constrained()->cascadeOnDelete();
             $table->text('answer');
-            $table->decimal('score',5,2);
+            $table->decimal('score',5,2)->nullable();
             $table->timestamps();
         });
     }

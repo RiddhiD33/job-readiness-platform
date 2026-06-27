@@ -9,6 +9,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class StudentProfile extends Model
 {
+
+protected $fillable = [
+    
+'user_id',
+'phone',
+'current_city',
+'cgpa',
+'portfolio_url',
+'resume_url',
+'career_path_id',
+'readiness_score',
+'profile_status',
+
+];
     public function user(): BelongsTo{
         return $this->belongsTo(User::class);
     }

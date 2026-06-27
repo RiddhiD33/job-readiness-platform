@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Assessment extends Model
 {
+    protected $fillable = [
+        'career_path_id',
+        'title',
+    ];
     public function careerPath(): BelongsTo{
         return $this->belongsTo(CareerPath::class);
     }
