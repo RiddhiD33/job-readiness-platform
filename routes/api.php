@@ -25,7 +25,7 @@ Route::get('/internships',[InternshipController::class,'index']);
 Route::get('/internships/{id}',[InternshipController::class,'show']);
 Route::post('/internships',[InternshipController::class,'store']);
 Route::put('/internships/{id}',[InternshipController::class,'update']);
-Route::delete('internships/{id}',[InternshipController::class,'destroy']);
+Route::delete('/internships/{id}',[InternshipController::class,'destroy']);
 Route::get('/assessments',[AssessmentController::class,'index']);
 Route::get('/assessments/{id}',[AssessmentController::class,'show']);
 Route::get('/assessment-questions',[AssessmentQuestionController::class,'index']);
@@ -38,9 +38,9 @@ Route::get('/assessment-attempts/{id}',[AssessmentAttemptController::class,'show
 Route::post('/assessment-attempts',[AssessmentAttemptController::class,'store']);
 Route::put('/assessment-attempts/{id}',[AssessmentAttemptController::class,'update']);
 Route::delete('/assessment-attempts/{id}',[AssessmentAttemptController::class,'destroy']);
-Route::get('/assessment-attempts-answers',[AssessmentAttemptAnswerController::class,'index']);
-Route::get('/assessment-attempts-answers/{id}',[AssessmentAttemptAnswerController::class,'show']);
-Route::post('/assessment-attempts-answers',[AssessmentAttemptAnswerController::class,'store']);
-Route::put('/assessment-attempts-answers/{id}',[AssessmentAttemptAnswerController::class,'update']);
-Route::delete('/assessment-attempts-answers/{id}',[AssessmentAttemptAnswerController::class,'destroy']);
+Route::get('/assessment-attempt-answers',[AssessmentAttemptAnswerController::class,'index']);
+Route::get('/assessment-attempt-answers/{id}',[AssessmentAttemptAnswerController::class,'show']);
+Route::post('/assessment-attempt-answers',[AssessmentAttemptAnswerController::class,'store']);
+Route::put('/assessment-attempt-answers/{id}',[AssessmentAttemptAnswerController::class,'update']);
+Route::delete('/assessment-attempt-answers/{id}',[AssessmentAttemptAnswerController::class,'destroy']);
 
