@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\AssessmentController;
 use App\Http\Controllers\Api\AssessmentQuestionController;
 use App\Http\Controllers\Api\AssessmentAttemptController;
 use App\Http\Controllers\Api\AssessmentAttemptAnswerController;
+use App\Http\Controllers\Api\AuthController;
 
 
 Route::get('/projects',[ProjectController::class,'index']);
@@ -43,4 +44,6 @@ Route::get('/assessment-attempt-answers/{id}',[AssessmentAttemptAnswerController
 Route::post('/assessment-attempt-answers',[AssessmentAttemptAnswerController::class,'store']);
 Route::put('/assessment-attempt-answers/{id}',[AssessmentAttemptAnswerController::class,'update']);
 Route::delete('/assessment-attempt-answers/{id}',[AssessmentAttemptAnswerController::class,'destroy']);
+Route::post('/register',[AuthController::class,'register']);
+
 
