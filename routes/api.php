@@ -10,25 +10,21 @@ use App\Http\Controllers\Api\AssessmentAttemptController;
 use App\Http\Controllers\Api\AssessmentAttemptAnswerController;
 use App\Http\Controllers\Api\AuthController;
 
+Route::middleware('auth:sanctum')->group(function (){
 
 Route::get('/projects',[ProjectController::class,'index']);
 Route::get('/projects/{id}',[ProjectController::class,'show']);
 Route::post('/projects',[ProjectController::class,'store']);
 Route::put('/projects/{id}',[ProjectController::class,'update']);
 Route::delete('/projects/{id}',[ProjectController::class,'destroy']);
-Route::get('/career-paths',[CareerPathController::class,'index']);
 Route::get('/student-profiles',[StudentProfileController::class,'index']);
 Route::get('/student-profiles/{id}',[StudentProfileController::class,'show']);
 Route::post('/student-profiles',[StudentProfileController::class,'store']);
 Route::put('/student-profiles/{id}', [StudentProfileController::class, 'update']);
 Route::delete('/student-profiles/{id}',[StudentProfileController::class,'destroy']);
-Route::get('/internships',[InternshipController::class,'index']);
-Route::get('/internships/{id}',[InternshipController::class,'show']);
 Route::post('/internships',[InternshipController::class,'store']);
 Route::put('/internships/{id}',[InternshipController::class,'update']);
 Route::delete('/internships/{id}',[InternshipController::class,'destroy']);
-Route::get('/assessments',[AssessmentController::class,'index']);
-Route::get('/assessments/{id}',[AssessmentController::class,'show']);
 Route::get('/assessment-questions',[AssessmentQuestionController::class,'index']);
 Route::get('/assessment-questions/{id}',[AssessmentQuestionController::class,'show']);
 Route::post('/assessment-questions',[AssessmentQuestionController::class,'store']);
@@ -44,8 +40,16 @@ Route::get('/assessment-attempt-answers/{id}',[AssessmentAttemptAnswerController
 Route::post('/assessment-attempt-answers',[AssessmentAttemptAnswerController::class,'store']);
 Route::put('/assessment-attempt-answers/{id}',[AssessmentAttemptAnswerController::class,'update']);
 Route::delete('/assessment-attempt-answers/{id}',[AssessmentAttemptAnswerController::class,'destroy']);
+Route::post('/logout', [AuthController::class, 'logout']);
+});
+
 Route::post('/register',[AuthController::class,'register']);
 Route::post('/login',[AuthController::class,'login']);
-Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
+Route::get('/career-paths',[CareerPathController::class,'index']);
+Route::get('/internships',[InternshipController::class,'index']);
+Route::get('/internships/{id}',[InternshipController::class,'show']);
+Route::get('/assessments',[AssessmentController::class,'index']);
+Route::get('/assessments/{id}',[AssessmentController::class,'show']);
+
 
 
