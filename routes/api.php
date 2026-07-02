@@ -45,5 +45,7 @@ Route::post('/assessment-attempt-answers',[AssessmentAttemptAnswerController::cl
 Route::put('/assessment-attempt-answers/{id}',[AssessmentAttemptAnswerController::class,'update']);
 Route::delete('/assessment-attempt-answers/{id}',[AssessmentAttemptAnswerController::class,'destroy']);
 Route::post('/register',[AuthController::class,'register']);
+Route::post('/login',[AuthController::class,'login']);
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 
 
