@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\AssessmentQuestionController;
 use App\Http\Controllers\Api\AssessmentAttemptController;
 use App\Http\Controllers\Api\AssessmentAttemptAnswerController;
 use App\Http\Controllers\Api\AuthController;
+use Illuminate\Http\Request;
 
 Route::middleware('auth:sanctum')->group(function (){
 
@@ -17,11 +18,10 @@ Route::get('/projects/{id}',[ProjectController::class,'show']);
 Route::post('/projects',[ProjectController::class,'store']);
 Route::put('/projects/{id}',[ProjectController::class,'update']);
 Route::delete('/projects/{id}',[ProjectController::class,'destroy']);
-Route::get('/student-profiles',[StudentProfileController::class,'index']);
-Route::get('/student-profiles/{id}',[StudentProfileController::class,'show']);
-Route::post('/student-profiles',[StudentProfileController::class,'store']);
-Route::put('/student-profiles/{id}', [StudentProfileController::class, 'update']);
-Route::delete('/student-profiles/{id}',[StudentProfileController::class,'destroy']);
+Route::get('/student-profile',[StudentProfileController::class,'show']);
+Route::post('/student-profile',[StudentProfileController::class,'store']);
+Route::put('/student-profile', [StudentProfileController::class, 'update']);
+Route::delete('/student-profile',[StudentProfileController::class,'destroy']);
 Route::post('/internships',[InternshipController::class,'store']);
 Route::put('/internships/{id}',[InternshipController::class,'update']);
 Route::delete('/internships/{id}',[InternshipController::class,'destroy']);
@@ -41,6 +41,17 @@ Route::post('/assessment-attempt-answers',[AssessmentAttemptAnswerController::cl
 Route::put('/assessment-attempt-answers/{id}',[AssessmentAttemptAnswerController::class,'update']);
 Route::delete('/assessment-attempt-answers/{id}',[AssessmentAttemptAnswerController::class,'destroy']);
 Route::post('/logout', [AuthController::class, 'logout']);
+
+});
+
+Route::get('/me', function () {
+    return response()->json([
+        'working' => true,
+    ]);
+});
+
+Route::get('/hello', function () {
+    return 'HELLO FROM API';
 });
 
 Route::post('/register',[AuthController::class,'register']);

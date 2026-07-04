@@ -8,21 +8,30 @@ use App\Models\StudentProfile;
 
 class StudentProfileController extends Controller
 {
-    public function index(){
-        $studentProfiles = StudentProfile::all();
-
-        return response()->json($studentProfiles);
+    public function show(Request $request){
+        $studentProfile = $request->user()->studentProfile;
+         if (!$studentProfile) {
+        return response()->json([
+            'message' => 'Student profile not found.'
+        ], 404);
     }
-
-    public function show($id){
-        $studentProfile = StudentProfile::with(['user', 'careerPath'])->findOrFail($id);
+    $studentProfile->load('careerPath');
         return response()->json($studentProfile);
     }
 
-    public function store(Request $request)
+ public function store(Request $request)
 {
+    $user = $request->user();
+
+    $studentProfile = $user->studentProfile;
+
+    if ($studentProfile) {
+        return response()->json([
+            'message' => 'Student profile already exists.'
+        ], 409);
+    }
+
     $validated = $request->validate([
-        'user_id' => 'required|exists:users,id',
         'phone' => 'required|digits:10',
         'current_city' => 'required|string',
         'cgpa' => 'nullable|numeric',
@@ -31,6 +40,8 @@ class StudentProfileController extends Controller
         'career_path_id' => 'required|exists:career_paths,id',
     ]);
 
+    $validated['user_id'] = $user->id;
+
     $validated['profile_status'] = 'draft';
 
     $studentProfile = StudentProfile::create($validated);
@@ -38,9 +49,17 @@ class StudentProfileController extends Controller
     return response()->json($studentProfile, 201);
 }
 
-  public function update(Request $request, $id)
+  public function update(Request $request)
 {
-    $studentProfile = StudentProfile::findOrFail($id);
+    $user = $request->user(); 
+
+    $studentProfile = $user->studentProfile;
+
+    if (!$studentProfile) {
+        return response()->json([
+            'message' => 'Student profile not found.'
+        ], 404);
+    }
 
     $validated = $request->validate([
         'phone' => 'sometimes|digits:10',
@@ -57,14 +76,22 @@ class StudentProfileController extends Controller
     return response()->json($studentProfile);
 }
 
-    public function destroy($id)
+    public function destroy(Request $request)
 {
-    $studentProfile = StudentProfile::findOrFail($id);
+    $user = $request->user();
+
+    $studentProfile = $user->studentProfile;
+
+    if (!$studentProfile) {
+        return response()->json([
+            'message' => 'Student profile not found.'
+        ], 404);
+    }
 
     $studentProfile->delete();
 
     return response()->json([
-        "message" => "Record Deleted Successfully"
+        'message' => 'Record Deleted Successfully'
     ]);
 }
 }
