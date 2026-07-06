@@ -11,7 +11,7 @@ use App\Http\Controllers\Api\AssessmentAttemptAnswerController;
 use App\Http\Controllers\Api\AuthController;
 use Illuminate\Http\Request;
 
-Route::middleware('auth:sanctum')->group(function (){
+Route::middleware(['auth:sanctum','role:student'])->group(function (){
 
 Route::get('/projects',[ProjectController::class,'index']);
 Route::get('/projects/{id}',[ProjectController::class,'show']);
@@ -44,10 +44,10 @@ Route::post('/logout', [AuthController::class, 'logout']);
 
 });
 
-Route::get('/me', function () {
-    return response()->json([
-        'working' => true,
-    ]);
+
+
+Route::middleware('auth:sanctum')->get('/me', function (Request $request) {
+    return $request->user();
 });
 
 Route::get('/hello', function () {
