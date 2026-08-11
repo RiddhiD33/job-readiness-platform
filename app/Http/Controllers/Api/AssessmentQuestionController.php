@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\AssessmentQuestion;
+use App\Models\Assessment;
 
 class AssessmentQuestionController extends Controller
 {
@@ -25,6 +26,7 @@ class AssessmentQuestionController extends Controller
             'question'=>'required|string',
             'options'=>'nullable|array',
             'correct_answer'=>'nullable',
+            'max_score' => 'required|integer|min:1',
         ]);
 
         $assessmentQuestion = AssessmentQuestion::create($validated);
@@ -40,6 +42,7 @@ class AssessmentQuestionController extends Controller
             'question'=>'sometimes|string',
             'options'=>'sometimes|nullable|array',
             'correct_answer'=>'sometimes|nullable',
+            'max_score' => 'sometimes|integer|min:1',
         ]);
 
         $assessmentQuestion ->update($validated);
@@ -47,13 +50,23 @@ class AssessmentQuestionController extends Controller
         return response()->json($assessmentQuestion);
     }
 
+public function assessmentQuestions($assessmentId)
+{
+    $assessment = Assessment::with('assessmentQuestions')->findOrFail($assessmentId);
+
+    return response()->json([
+        'assessment' => $assessment,
+        'questions' => $assessment->assessmentQuestions
+    ]);
+}
+
     public function destroy($id){
         $assessmentQuestion = AssessmentQuestion::findOrFail($id);
 
         $assessmentQuestion ->delete();
 
         return response()->json([
-            'Message'=>'Record eted Successfully!!'
+            'Message'=>'Record deleted Successfully!!'
         ]);
     }
 

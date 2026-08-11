@@ -27,6 +27,8 @@ Route::put('/internships/{id}',[InternshipController::class,'update']);
 Route::delete('/internships/{id}',[InternshipController::class,'destroy']);
 Route::get('/assessment-questions',[AssessmentQuestionController::class,'index']);
 Route::get('/assessment-questions/{id}',[AssessmentQuestionController::class,'show']);
+Route::get('/student/assessments', [AssessmentController::class, 'studentAssessments']);
+Route::get('/assessments/{assessmentId}/questions', [AssessmentQuestionController::class, 'assessmentQuestions']);
 Route::post('/assessment-questions',[AssessmentQuestionController::class,'store']);
 Route::put('/assessment-questions/{id}',[AssessmentQuestionController::class,'update']);
 Route::delete('/assessment-questions/{id}',[AssessmentQuestionController::class,'destroy']);
@@ -49,6 +51,16 @@ Route::post('/logout', [AuthController::class, 'logout']);
 Route::middleware('auth:sanctum')->get('/me', function (Request $request) {
     return $request->user();
 });
+
+Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
+
+    Route::post(
+        '/assessment-attempts/{id}/evaluate',
+        [AssessmentAttemptController::class, 'evaluateAssessmentAttempt']
+    );
+
+});
+
 
 Route::get('/hello', function () {
     return 'HELLO FROM API';

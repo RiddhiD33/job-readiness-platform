@@ -14,6 +14,7 @@ class AssessmentQuestion extends Model
         'question',
         'options',
         'correct_answer',
+        'max_score',
     ];
 
     protected $casts = [

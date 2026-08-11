@@ -5,9 +5,18 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\AssessmentAttempt;
+use App\Services\ReadinessScoreService;
 
 class AssessmentAttemptController extends Controller
 {
+    protected ReadinessScoreService $readinessScoreService;
+
+public function __construct(ReadinessScoreService $readinessScoreService)
+{
+    $this->readinessScoreService = $readinessScoreService;
+}
+
+
     public function index(){
         $assessmentAttempt = AssessmentAttempt::all();
         return response()->json($assessmentAttempt);
@@ -44,6 +53,31 @@ class AssessmentAttemptController extends Controller
         return response()->json($assessmentAttempt);
     }
 
+   public function evaluateAssessmentAttempt($id)
+{
+    $attempt = AssessmentAttempt::with([
+        'assessmentAttemptAnswers.assessmentQuestion',
+        'studentProfile.user'
+    ])->findOrFail($id);
+
+    $pendingAnswers = $attempt->assessmentAttemptAnswers
+        ->where('is_checked', false);
+
+    if ($pendingAnswers->isNotEmpty()) {
+
+        return response()->json([
+            'message' => 'Cannot evaluate assessment. Some answers are still pending review.',
+            'pending_answers' => $pendingAnswers->count(),
+        ], 422);
+
+    }
+
+    return response()->json([
+        'message' => 'All answers have been reviewed.',
+        'attempt' => $attempt,
+    ]);
+}
+
     public function destroy($id){
         $assessmentAttempt = AssessmentAttempt::findORFail($id);
 
@@ -51,5 +85,7 @@ class AssessmentAttemptController extends Controller
 
         return response()->json(['message'=>'Record deleted successfully']);
     }
+
+    
 
 }

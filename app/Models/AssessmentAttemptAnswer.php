@@ -12,6 +12,7 @@ class AssessmentAttemptAnswer extends Model
         'assessment_question_id',
         'answer',
         'score',
+        'is_checked',
     ];
     
     public function assessmentAttempt(): BelongsTo{

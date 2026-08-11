@@ -19,18 +19,62 @@ class AssessmentSeeder extends Seeder
         ]);
 
         Assessment::create([
-            'career_path_id' =>2,
-            'title'=>'Frontend Tests',
-        ]);
-
-        Assessment::create([
             'career_path_id' => 3,
             'title'=>'PHP Basics',
         ]);
 
+         Assessment::create([
+            'career_path_id' =>1,
+            'title'=>'Laravel Authentication'
+        ]);
+
+         Assessment::create([
+            'career_path_id' =>1,
+            'title'=>'Laravel CRUD Operations'
+        ]);
+
+        Assessment::create([
+            'career_path_id' =>2,
+            'title'=>'HTML & CSS Fundamentals',
+        ]);
+
+        Assessment::create([
+            'career_path_id' =>2,
+            'title'=>'JavaScript Essentials',
+        ]);
+
+        Assessment::create([
+            'career_path_id' =>2,
+            'title'=>'React Basics',
+        ]);
+
+         Assessment::create([
+            'career_path_id' => 3,
+            'title'=>'Object-Oriented PHP',
+        ]);
+
+         Assessment::create([
+            'career_path_id' => 3,
+            'title'=>'Composer & Autoloading',
+        ]);
+
         Assessment::create([
             'career_path_id'=>4,
-            'title'=>'CRUD Advanced',
+            'title'=>'REST API Development',
         ]);
+
+        Assessment::create([
+            'career_path_id'=>4,
+            'title'=>'Database Design',
+        ]);
+
+        Assessment::create([
+            'career_path_id'=>4,
+            'title'=>'Deployment Basics',
+        ]);
+
+        
+
+
     }
 }
