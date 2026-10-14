@@ -59,55 +59,138 @@ When a student retakes an assessment:
 
 Projects demonstrate practical implementation skills.
 
-Projects may include:
+Only published projects contribute to the readiness score.
 
-* Title
-* Description
-* Technologies Used
-* GitHub Link (Optional)
-* Demo Link (Optional)
+Each published project is evaluated independently.
 
-Projects contribute to the readiness score based on platform-defined scoring rules.
+Base Project Score
 
----
+Every published project starts with
 
-# Internship Contribution (25%)
+10 points
+GitHub Repository
 
-Internships demonstrate industry exposure and real-world experience.
+If the project contains a GitHub repository:
 
-Internships may include:
++3 points
+Live Demo
 
-* Company Name
-* Designation
-* Tech Stack
-* Start Date
-* End Date
-* Internship Description
-* Certificate (Optional)
-* GitHub Link (Optional)
-* Demo Link (Optional)
+If the project contains a working demo link:
 
-Internships contribute to the readiness score based on platform-defined scoring rules.
++2 points
+Career Path Skill Matching
 
----
+Each project is also evaluated against the skills required by the student's selected career path.
 
-# Profile Completeness Contribution (10%)
+The platform calculates
 
-Students receive profile completeness points for providing important profile information.
+Matched Skills
+-----------------------
+Career Path Skills
 
-Examples:
+The result contributes a maximum of
 
-* Profile Information
-* Academic Information
-* Career Path
-* Resume
-* Skills
-* Current City
-* Portfolio Links
+5 points
 
-Profile completeness encourages students to maintain complete profiles.
+Example
 
----
+Career Path Skills
+
+PHP
+Laravel
+MySQL
+
+Project Skills
+
+PHP
+Laravel
+
+Matching
+
+2 / 3
+
+Skill Score
+
+2/3 × 5 = 3.33
+
+Final Project Score
+
+10
++3 GitHub
++2 Demo
++3.33 Skill Match
+=
+18.33
+
+The maximum readiness contribution from projects is capped at
+
+100
+3. Internship section also needs updating
+
+Replace it similarly.
+
+Internship Contribution (25%)
+
+Only published internships contribute to the readiness score.
+
+Each internship begins with
+
+10 points
+
+If a certificate is provided
+
++5 points
+
+# Internship skills are compared against the student's selected career path.
+
+Skill matching contributes up to
+
+5 points
+
+Example
+
+Career Path
+
+HTML
+CSS
+JavaScript
+
+Internship Skills
+
+HTML
+CSS
+
+Skill Score
+
+2/3 × 5 = 3.33
+
+Final Internship Score
+
+10
++5 Certificate
++3.33 Skill Match
+=
+18.33
+
+The internship contribution is capped at
+
+100
+
+# Profile Completeness (10%)
+
+The profile score is calculated from six fields.
+
+Field	Points
+Phone Number	10
+Current City	10
+Career Path	10
+CGPA	20
+Resume	25
+Portfolio	25
+
+Maximum
+
+100
 
 # Skill Handling
 
@@ -130,11 +213,14 @@ The readiness score is recalculated when:
 
 * Student completes an assessment
 * Student retakes an assessment
-* Student adds a project
+* Student creates a project
 * Student updates a project
+* Student publishes a project
 * Student deletes a project
-* Student adds an internship
+
+* Student creates an internship
 * Student updates an internship
+* Student publishes an internship
 * Student deletes an internship
 * Student updates profile information
 * Student changes career path
@@ -182,13 +268,15 @@ Historical records help demonstrate learning progress and growth.
 
 # Missing Data Rules
 
-Students may not always have internships or projects.
+Current Version (V1)
 
-The readiness score calculation must handle:
+If a student has no projects or internships, those components contribute
 
-* No internship available
-* No project available
-* No internship and no project available
+0
+
+The component weights remain unchanged.
+
+Future versions may introduce intelligent weight redistribution to better support early-semester students.
 
 ## Weight Redistribution Rules
 
@@ -258,3 +346,47 @@ Version 1 includes:
 * Career path recalculation
 
 Future versions may introduce additional scoring enhancements and analytics.
+
+
+Career Path Relevance
+
+Projects and internships are evaluated only against the student's currently selected career path.
+
+Skill matching is performed using
+
+Career Path Skills
+
+versus
+
+Project Skills
+
+or
+
+Internship Skills
+
+This ensures that unrelated work contributes less than work directly aligned with the student's career goal.
+
+9. Add another section
+
+This is something we discussed today.
+
+Current Limitations
+
+The current scoring system evaluates
+
+Project publication status
+GitHub availability
+Demo availability
+Skill matching
+Internship certificate
+Internship skill matching
+
+The platform does not yet evaluate
+
+Project originality
+Code quality
+Complexity
+Architecture
+Problem-solving ability
+
+These improvements are planned for future versions.

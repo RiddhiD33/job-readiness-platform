@@ -11,30 +11,59 @@ class AssessmentAttemptSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
-    {
-       AssessmentAttempt::create([
-    'student_profile_id' => 1,
-    'assessment_id' => 1,
-    'score' => null,
-]);
+ public function run(): void
+{
+
+   // Student Profile 1 (Laravel)
 
 AssessmentAttempt::create([
     'student_profile_id' => 1,
-    'assessment_id' => 2,
-    'score' => 87,
-]);
-
-AssessmentAttempt::create([
-    'student_profile_id' => 2,
     'assessment_id' => 1,
-    'score' => 56,
+    'score' => 40,
 ]);
 
 AssessmentAttempt::create([
-    'student_profile_id' => 2,
+    'student_profile_id' => 1,
     'assessment_id' => 3,
-    'score' => null,
+    'score' => 70,
+]);
+
+AssessmentAttempt::create([
+    'student_profile_id' => 1,
+    'assessment_id' => 4,
+    'score' => 90,
+]);
+
+AssessmentAttempt::create([
+    'student_profile_id' => 1,
+    'assessment_id' => 1,
+    'score' => 95, // Retake
+]);
+
+// Student Profile 2 (Frontend)
+
+AssessmentAttempt::create([
+    'student_profile_id' => 2,
+    'assessment_id' => 5,
+    'score' => 55,
+]);
+
+AssessmentAttempt::create([
+    'student_profile_id' => 2,
+    'assessment_id' => 6,
+    'score' => 80,
+]);
+
+AssessmentAttempt::create([
+    'student_profile_id' => 2,
+    'assessment_id' => 7,
+    'score' => 90,
+]);
+
+AssessmentAttempt::create([
+    'student_profile_id' => 2,
+    'assessment_id' => 5,
+    'score' => 85, // Retake
 ]);
 }
 }

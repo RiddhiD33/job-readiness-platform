@@ -21,27 +21,71 @@ class AssessmentAttemptAnswerController extends Controller
         return response()->json($assessmentAttemptAnswer);
     }
 
-    public function store(Request $request)
+ public function store(Request $request)
 {
     $validated = $request->validate([
-        'assessment_attempt_id' => 'required|exists:assessment_attempts,id',
+        'assessment_attempt_id'  => 'required|exists:assessment_attempts,id',
         'assessment_question_id' => 'required|exists:assessment_questions,id',
-        'answer' => 'required',
-        'score' => 'nullable|numeric',
+        'answer'                 => 'required',
     ]);
 
+    // Get logged in student's profile
+    $studentProfile = auth()->user()->studentProfile;
+
+    if (!$studentProfile) {
+        return response()->json([
+            'message' => 'Student profile not found.'
+        ], 404);
+    }
+
+    // Find assessment attempt
     $attempt = AssessmentAttempt::findOrFail($validated['assessment_attempt_id']);
+
+    // Ensure the attempt belongs to the logged-in student
+    if ($attempt->student_profile_id !== $studentProfile->id) {
+        return response()->json([
+            'message' => 'Unauthorized.'
+        ], 403);
+    }
+
+    // Find question
     $question = AssessmentQuestion::findOrFail($validated['assessment_question_id']);
 
+    // Ensure the question belongs to the assessment
     if ($attempt->assessment_id !== $question->assessment_id) {
         return response()->json([
-            'message' => 'Question does not belong to this assessment attempt'
+            'message' => 'Question does not belong to this assessment.'
         ], 422);
     }
 
-    $assessmentAttemptAnswer = AssessmentAttemptAnswer::create($validated);
+    // Prevent duplicate answers
+    $alreadyAnswered = AssessmentAttemptAnswer::where(
+            'assessment_attempt_id',
+            $validated['assessment_attempt_id']
+        )
+        ->where(
+            'assessment_question_id',
+            $validated['assessment_question_id']
+        )
+        ->exists();
 
-    return response()->json($answer, 201);
+    if ($alreadyAnswered) {
+        return response()->json([
+            'message' => 'You have already answered this question.'
+        ], 409);
+    }
+
+    // Save answer
+    $assessmentAttemptAnswer = AssessmentAttemptAnswer::create([
+        'assessment_attempt_id'  => $validated['assessment_attempt_id'],
+        'assessment_question_id' => $validated['assessment_question_id'],
+        'answer'                 => $validated['answer'],
+    ]);
+
+    return response()->json([
+        'message' => 'Answer submitted successfully.',
+        'data' => $assessmentAttemptAnswer,
+    ], 201);
 }
 
 public function update(Request $request, $id){

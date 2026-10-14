@@ -21,6 +21,6 @@ class Skill extends Model
     }
 
     public function internships(): BelongsToMany{
-        return $this->belongsToMany(Internship::class);
+        return $this->belongsToMany(Internship::class, 'internship_skills');
     }
 }

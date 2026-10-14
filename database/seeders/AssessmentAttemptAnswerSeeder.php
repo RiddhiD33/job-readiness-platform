@@ -2,30 +2,39 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\AssessmentAttempt;
 use App\Models\AssessmentAttemptAnswer;
+use App\Models\AssessmentQuestion;
 
 class AssessmentAttemptAnswerSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        AssessmentAttemptAnswer::create([
-            'assessment_attempt_id'=>2,
-            'assessment_question_id'=>3,
-            'answer'=>'Cascading Style Sheet',
-            'score'=>100,
-        ]);
+        foreach (AssessmentAttempt::all() as $attempt) {
 
-        AssessmentAttemptAnswer::create([
-            'assessment_attempt_id'=>2,
-            'assessment_question_id'=>5,
-            'answer'=>'Created responsive navbar using flexbox.',
-            'score'=>null,
-        ]);
-        
+            $questions = AssessmentQuestion::where(
+                'assessment_id',
+                $attempt->assessment_id
+            )->get();
+
+            foreach ($questions as $question) {
+
+                AssessmentAttemptAnswer::create([
+    'assessment_attempt_id' => $attempt->id,
+    'assessment_question_id' => $question->id,
+
+    'answer' => $question->question_type === 'mcq'
+        ? $question->correct_answer
+        : 'Practical answer submitted',
+
+    'score' => $question->question_type === 'mcq'
+        ? $question->max_score
+        : null,
+
+    'is_checked' => $question->question_type === 'mcq',
+]);
+            }
+        }
     }
 }
